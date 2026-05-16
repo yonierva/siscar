@@ -13,6 +13,9 @@ public class TipoSolicitud {
     @Column(name = "tipoSolicitud_IDEN")
     private Integer id;
 
-    @Column(name = "nombreTipo")
-    private String nombreTipo;
+    @Column(name = "codigoFormato")
+    private String codigoFormato;
+
+    @Column(name = "nombre")
+    private String nombre;
 }
