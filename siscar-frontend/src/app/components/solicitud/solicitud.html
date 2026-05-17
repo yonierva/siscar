@@ -1,0 +1,20 @@
+<header>
+    <h1>Sticker autorizado</h1>
+    <nav>
+        <a routerLink="/solicitud" routerLinkActive="active">Sticker</a>
+        <a routerLink="/sticker-preview" routerLinkActive="active">Vista Preliminar Stickers</a>
+    </nav>
+    <form action="">
+        <app-empresa-modal></app-empresa-modal>
+        <div></div>
+        <input type="checkbox" id="estemporal" name="esTemporal" [(ngModel)]="solicitud.esTemporal">
+        <label for="estemporal">Es temporal</label>
+
+        <mat-form-field>
+            <mat-label>Fecha entrada</mat-label>
+            <input matInput [matDatepicker]="pickerEntrada" [(ngModel)]="solicitud.fechaEntrada" name="fechaEntrada" id="fechaEntrada">
+            <mat-datepicker-toggle matSuffix [for]="pickerEntrada"></mat-datepicker-toggle>
+            <mat-datepicker #pickerEntrada></mat-datepicker>
+        </mat-form-field>
+    </form>
+</header>
