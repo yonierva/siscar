@@ -9,6 +9,9 @@ import com.siscar.siscar_backend.service.IEmpleadoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class EmpleadoServiceImpl implements IEmpleadoService {
@@ -20,6 +23,13 @@ public class EmpleadoServiceImpl implements IEmpleadoService {
         return empleadoRepository.findByNumeroIdentificacion(cedula)
                 .map(this::mapToDTO)
                 .orElse(null);
+    }
+
+    public List<EmpleadoResponseDTO> listarPorEmpresa(Integer idEmpresa){
+        return empleadoRepository.findByIdEmpresa(idEmpresa)
+                .stream()
+                .map(this::mapToDTO)
+                .collect(Collectors.toList());
     }
 
     @Override
