@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +31,7 @@ public class SolicitudServiceImpl implements ISolicitudService {
 
         // 1. Guardar Solicitud
         Solicitud solicitud = new Solicitud();
+        solicitud.setTiempoSolicitado(LocalDateTime.now().toString());
         solicitud.setFechaSolicitud(LocalDate.now());
         solicitud.setIdEmpresa(dto.getIdEmpresa());
         solicitud.setIdTipoSolicitud(dto.getIdTipoSolicitud());
@@ -112,4 +114,5 @@ public class SolicitudServiceImpl implements ISolicitudService {
 
         return dto;
     }
+
 }
