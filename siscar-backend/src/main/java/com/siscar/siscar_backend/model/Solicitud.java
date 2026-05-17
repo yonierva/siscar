@@ -31,10 +31,10 @@ public class Solicitud {
     private Integer idTipoSolicitud;
 
     @Column(name = "horaEntrada")
-    private LocalTime horaEntrada;
+    private String horaEntrada;
 
     @Column(name = "horaSalida")
-    private LocalTime horaSalida;
+    private String horaSalida;
 
     @Column(name = "correoFacturacion")
     private String correoFacturacion;

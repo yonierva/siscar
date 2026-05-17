@@ -10,5 +10,5 @@ import java.util.List;
 
 @Repository
 public interface SolicitudAreaRepository extends JpaRepository<SolicitudArea, Integer> {
-    List<Integer> findAreaIdsBySolicitudId(@Param("idSolicitud") Integer idSolicitud);
+    List<SolicitudArea> findByIdSolicitud(Integer idSolicitud);
 }

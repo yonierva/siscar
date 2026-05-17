@@ -16,8 +16,7 @@ public class StickerController {
     private final IStickerService stickerService;
 
     @GetMapping
-    public ResponseEntity<List<StickerResponseDTO>> listarPorSolicitud(
-            @RequestParam Integer idSolicitud) {
+    public ResponseEntity<List<StickerResponseDTO>> listarPorSolicitud(@RequestParam Integer idSolicitud) {
         return ResponseEntity.ok(stickerService.listarPorSolicitud(idSolicitud));
     }
 }

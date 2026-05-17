@@ -11,8 +11,8 @@ public class SolicitudRequestDTO {
     private Integer idEmpresa;
     private LocalDate fechaEntrada;
     private LocalDate fechaSalida;
-    private LocalTime horaEntrada;
-    private LocalTime horaSalida;
+    private String horaEntrada;
+    private String horaSalida;
     private Boolean esTemporal;
     private Integer idTipoSolicitud;
     private List<Integer> areasSeleccionadas;

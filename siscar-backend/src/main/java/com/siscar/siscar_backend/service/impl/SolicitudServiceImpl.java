@@ -74,8 +74,7 @@ public class SolicitudServiceImpl implements ISolicitudService {
             sticker.setDevolvioStickers(false);
             stickerRepository.save(sticker);
 
-            stickers.add(buildStickerResponse(sticker, idEmpleado,
-                    dto.getAreasSeleccionadas(), dto.getIdEmpresa()));
+            stickers.add(buildStickerResponse(sticker, idEmpleado, dto.getAreasSeleccionadas(), dto.getIdEmpresa()));
         }
 
         return stickers;

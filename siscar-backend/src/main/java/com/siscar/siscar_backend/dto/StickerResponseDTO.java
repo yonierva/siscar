@@ -16,8 +16,8 @@ public class StickerResponseDTO {
     private String urlImagen;
     private LocalDate fechaEntrada;
     private LocalDate fechaSalida;
-    private LocalTime horaEntrada;
-    private LocalTime horaSalida;
+    private String horaEntrada;
+    private String horaSalida;
     private Boolean esTemporal;
     private List<String> areas;
     private String razonSocialEmpresa;

@@ -1,6 +1,8 @@
 package com.siscar.siscar_backend.service.impl;
 
 import com.siscar.siscar_backend.dto.StickerResponseDTO;
+import com.siscar.siscar_backend.model.Solicitud;
+import com.siscar.siscar_backend.model.SolicitudArea;
 import com.siscar.siscar_backend.model.Sticker;
 import com.siscar.siscar_backend.repository.*;
 import com.siscar.siscar_backend.service.IStickerService;
@@ -8,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -26,11 +29,13 @@ public class StickerServiceImpl implements IStickerService {
         List<StickerResponseDTO> response = new ArrayList<>();
 
         Integer idEmpresa = solicitudRepository.findById(idSolicitud)
-                .map(s -> s.getIdEmpresa())
+                .map(Solicitud::getIdEmpresa)
                 .orElse(null);
 
         List<Integer> idAreas = solicitudAreaRepository
-                .findAreaIdsBySolicitudId(idSolicitud);
+                .findByIdSolicitud(idSolicitud).stream()
+                .map(SolicitudArea::getIdArea)
+                .toList();
 
         for (Sticker sticker : stickers) {
             StickerResponseDTO dto = new StickerResponseDTO();

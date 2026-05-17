@@ -22,10 +22,10 @@ public class Sticker {
     private LocalDate fechaSalida;
 
     @Column(name = "horaEntrada")
-    private LocalTime horaEntrada;
+    private String horaEntrada;
 
     @Column(name = "horaSalida")
-    private LocalTime horaSalida;
+    private String horaSalida;
 
     @Column(name = "IDEN_empleado")
     private Integer idEmpleado;
