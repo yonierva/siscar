@@ -23,10 +23,10 @@ public class EmpleadoController {
     }
 
     @GetMapping("/cedula")
-    public ResponseEntity<EmpleadoResponseDTO>buscarPorCedula(@RequestParam Long cedula){
+    public ResponseEntity<?>buscarPorCedula(@RequestParam Long cedula){
         EmpleadoResponseDTO empleado = empleadoService.buscarPorCedula(cedula);
         if (empleado == null){
-           return ResponseEntity.notFound().build();
+            return ResponseEntity.status(404).body("Empleado no encontrado" + cedula);
         }
         return ResponseEntity.ok(empleado);
     }
