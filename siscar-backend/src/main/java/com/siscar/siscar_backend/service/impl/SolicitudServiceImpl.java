@@ -29,6 +29,23 @@ public class SolicitudServiceImpl implements ISolicitudService {
     @Transactional
     public List<StickerResponseDTO> guardarSolicitud(SolicitudRequestDTO dto) {
 
+        if (dto.getIdEmpresa() == null)
+            throw new IllegalArgumentException("Debe seleccionar una empresa");
+        if (dto.getIdTipoSolicitud() == null)
+            throw new IllegalArgumentException("Debe seleccionar un tipo de solicitud");
+        if (dto.getAreasSeleccionadas() == null || dto.getAreasSeleccionadas().isEmpty())
+            throw new IllegalArgumentException("Debe seleccionar al menos un área");
+        if (dto.getEmpleadosSeleccionados() == null || dto.getEmpleadosSeleccionados().isEmpty())
+            throw new IllegalArgumentException("Debe seleccionar al menos un empleado");
+        if (dto.getFechaEntrada() == null)
+            throw new IllegalArgumentException("La fecha de entrada es obligatoria");
+        if (dto.getFechaSalida() == null)
+            throw new IllegalArgumentException("La fecha de salida es obligatoria");
+        if (dto.getHoraEntrada() == null || dto.getHoraEntrada().isEmpty())
+            throw new IllegalArgumentException("La hora de entrada es obligatoria");
+        if (dto.getHoraSalida() == null || dto.getHoraSalida().isEmpty())
+            throw new IllegalArgumentException("La hora de salida es obligatoria");
+
         // 1. Guardar Solicitud
         Solicitud solicitud = new Solicitud();
         solicitud.setTiempoSolicitado(LocalDateTime.now().toString());
