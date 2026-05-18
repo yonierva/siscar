@@ -7,5 +7,5 @@ export interface Empleado {
     numeroIdentificacion: number;
     tipoSangre: string;
     urlImagen: string;
-    categoria: string;
+    idEmpresa: number;
 }

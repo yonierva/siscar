@@ -1,0 +1,112 @@
+.empresa-label {
+  font-size: 12px;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 4px;
+}
+
+.empresa-btn {
+  background: #2a2a2a;
+  border: 1px solid #444;
+  border-radius: 8px;
+  padding: 12px 16px;
+  color: rgba(255,255,255,0.6);
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-contenido {
+  background: #2a2a2a;
+  border-radius: 12px;
+  padding: 24px;
+  width: 500px;
+  border: 1px solid #444;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.modal-header h3 {
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.btn-cerrar {
+  background: transparent;
+  border: none;
+  color: rgba(255,255,255,0.6);
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.busqueda-row {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.busqueda-row mat-form-field {
+  flex: 1;
+}
+
+.resultados {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.resultado-item {
+  padding: 12px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #444;
+}
+
+.resultado-item:hover {
+  background: #E85D04;
+}
+
+.empresa-nombre {
+  color: white;
+  font-size: 14px;
+}
+
+.empresa-nit {
+  color: rgba(255,255,255,0.6);
+  font-size: 12px;
+}
+
+.sin-resultados {
+  color: rgba(255,255,255,0.6);
+  text-align: center;
+  padding: 20px;
+  font-size: 14px;
+}

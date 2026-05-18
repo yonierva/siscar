@@ -1,0 +1,112 @@
+.empleado-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  height: 100%;
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.panel-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: white;
+  white-space: nowrap;
+}
+
+.busqueda-row {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.busqueda-row mat-form-field {
+  width: 200px;
+}
+
+.tabla-empleados {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  overflow-y: auto;
+}
+
+.tabla-header {
+  display: grid;
+  grid-template-columns: 40px 120px 1fr 1fr 80px 50px;
+  gap: 8px;
+  padding: 8px 12px;
+  font-size: 11px;
+  color: rgba(255,255,255,0.5);
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.tabla-fila {
+  display: grid;
+  grid-template-columns: 40px 120px 1fr 1fr 80px 50px;
+  gap: 8px;
+  padding: 10px 12px;
+  background: #2a2a2a;
+  border-radius: 8px;
+  align-items: center;
+  font-size: 13px;
+  color: white;
+  border: 1px solid #333;
+}
+
+.badge {
+  background: rgba(232, 93, 4, 0.2);
+  color: #E85D04;
+  padding: 4px 8px;
+  border-radius: 20px;
+  font-size: 11px;
+  text-align: center;
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(232, 93, 4, 0.3);
+  color: #E85D04;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.sin-empleados {
+  color: rgba(255,255,255,0.4);
+  text-align: center;
+  padding: 40px;
+  font-size: 14px;
+}
+
+.form-crear {
+  background: #2a2a2a;
+  border-radius: 8px;
+  padding: 16px;
+  border: 1px solid #E85D04;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-crear h4 {
+  color: #E85D04;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.fila-dos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}

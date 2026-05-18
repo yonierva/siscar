@@ -1,1 +1,38 @@
-<p>empresa-modal works!</p>
+<div class="empresa-label">Empresa</div>
+<button class="empresa-btn" (click)="abrirModal()">
+    <span>{{ empresaElegida ? empresaElegida.razonSocial : 'Seleccionar empresa...' }}</span>
+    <span>🔍</span>
+</button>
+
+<!-- Modal overlay -->
+<div class="modal-overlay" *ngIf="modalAbierto" (click)="cerrarModal()">
+    <div class="modal-contenido" (click)="$event.stopPropagation()">
+
+        <div class="modal-header">
+            <h3>Buscar empresa</h3>
+            <button class="btn-cerrar" (click)="cerrarModal()">✕</button>
+        </div>
+
+        <div class="modal-body">
+            <div class="busqueda-row">
+                <mat-form-field>
+                    <mat-label>Nombre de la empresa</mat-label>
+                    <input matInput [(ngModel)]="busqueda" name="busqueda" (input)="onBusquedaChange()"
+                        placeholder="Ej: Johanny">
+                </mat-form-field>
+            </div>
+
+            <div class="resultados" *ngIf="empresas.length > 0">
+                <div class="resultado-item" *ngFor="let empresa of empresas" (click)="seleccionar(empresa)">
+                    <span class="empresa-nombre">{{ empresa.razonSocial }}</span>
+                    <span class="empresa-nit">{{ empresa.nit }}</span>
+                </div>
+            </div>
+
+            <div class="sin-resultados" *ngIf="empresas.length === 0 && busqueda.length > 0">
+                No se encontraron empresas
+            </div>
+        </div>
+
+    </div>
+</div>

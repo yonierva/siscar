@@ -1,7 +1,7 @@
 <div class="solicitud-container">
     <div class="panel-izquierdo">
         <form action="">
-            <app-empresa-modal></app-empresa-modal>
+            <app-empresa-modal (empresaSeleccionada)="onEmpresaSeleccionada($event)"></app-empresa-modal>
             <div>
                 <mat-checkbox [(ngModel)]="solicitud.esTemporal" name="esTemporal" id="esTemporal"></mat-checkbox>
                 <mat-label>es Temporal</mat-label>
@@ -23,14 +23,21 @@
                 </mat-form-field>
             </div>
             <div class="fila-dos">
-                <mat-form-field>
-                    <mat-label>Hora entrada</mat-label>
-                    <input matInput type="time" [(ngModel)]="solicitud.horaEntrada" name="horaEntrada" id="horaEntrada">
-                </mat-form-field>
                 <mat-form-field appearance="outline">
                     <mat-label>Hora entrada</mat-label>
 
                     <mat-select [(ngModel)]="solicitud.horaEntrada" name="horaEntrada">
+
+                        <mat-option *ngFor="let hora of horas" [value]="hora">
+                            {{ hora }}
+                        </mat-option>
+
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Hora salida</mat-label>
+
+                    <mat-select [(ngModel)]="solicitud.horaSalida" name="horaSalida">
 
                         <mat-option *ngFor="let hora of horas" [value]="hora">
                             {{ hora }}
@@ -62,6 +69,6 @@
         </form>
     </div>
     <div class="panel-derecho">
-        <!-- tabla empleados aquí -->
+        <app-empleado-modal [idEmpresa]="solicitud.idEmpresa" (empleadosActualizados)="onEmpleadosActualizados($event)"></app-empleado-modal>
     </div>
 </div>
