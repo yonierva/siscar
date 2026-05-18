@@ -8,8 +8,12 @@
 
 # Node
 /node_modules
+node_modules/
+**/node_modules/
+.pnpm/git add .
 npm-debug.log
 yarn-error.log
+
 
 # IDEs and editors
 .idea/

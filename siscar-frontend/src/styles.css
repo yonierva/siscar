@@ -1,1 +1,109 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Roboto, sans-serif;
+  background-color: #1a1a1a;
+  color: #ffffff;
+}
+
+/* Header */
+header {
+  background-color: #E85D04;
+  color: white;
+  padding: 0 24px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+header h1 {
+  font-size: 18px;
+  font-weight: 500;
+  color: white;
+}
+
+header nav a {
+  color: rgba(255,255,255,0.75);
+  text-decoration: none;
+  padding: 0 16px;
+  height: 56px;
+  display: inline-flex;
+  align-items: center;
+  font-size: 14px;
+  border-bottom: 3px solid transparent;
+}
+
+header nav a.active {
+  color: white;
+  border-bottom: 3px solid white;
+}
+
+/* Angular Material dark overrides */
+.mat-mdc-form-field {
+  width: 100%;
+}
+
+.mdc-text-field {
+  background-color: #2a2a2a !important;
+  border-radius: 8px !important;
+}
+
+.mdc-text-field--outlined .mdc-notched-outline__leading,
+.mdc-text-field--outlined .mdc-notched-outline__notch,
+.mdc-text-field--outlined .mdc-notched-outline__trailing {
+  border-color: #444 !important;
+}
+
+.mat-mdc-input-element {
+  color: white !important;
+}
+
+.mat-mdc-select-value {
+  color: white !important;
+}
+
+.mat-mdc-form-field-label {
+  color: rgba(255,255,255,0.6) !important;
+}
+
+.mdc-floating-label {
+  color: rgba(255,255,255,0.6) !important;
+}
+
+/* Checkbox naranja */
+.mdc-checkbox__background {
+  border-color: #E85D04 !important;
+}
+
+.mdc-checkbox--selected .mdc-checkbox__background {
+  background-color: #E85D04 !important;
+  border-color: #E85D04 !important;
+}
+
+/* Botón guardar */
+.btn-guardar {
+  width: 100%;
+  background-color: #E85D04 !important;
+  color: white !important;
+  border-radius: 8px !important;
+  height: 48px !important;
+  font-size: 16px !important;
+}
+
+/* Select panel */
+.mat-mdc-select-panel {
+  background-color: #2a2a2a !important;
+  color: white !important;
+}
+
+.mat-mdc-option {
+  color: white !important;
+}

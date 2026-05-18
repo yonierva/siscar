@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { TipoSolicitud } from './tipo-solicitud';
+import { SolicitudApi } from './solicitud-api';
 
-describe('TipoSolicitud', () => {
-  let service: TipoSolicitud;
+describe('SolicitudApi', () => {
+  let service: SolicitudApi;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(TipoSolicitud);
+    service = TestBed.inject(SolicitudApi);
   });
 
   it('should be created', () => {

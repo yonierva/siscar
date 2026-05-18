@@ -1,20 +1,67 @@
-<header>
-    <h1>Sticker autorizado</h1>
-    <nav>
-        <a routerLink="/solicitud" routerLinkActive="active">Sticker</a>
-        <a routerLink="/sticker-preview" routerLinkActive="active">Vista Preliminar Stickers</a>
-    </nav>
-    <form action="">
-        <app-empresa-modal></app-empresa-modal>
-        <div></div>
-        <input type="checkbox" id="estemporal" name="esTemporal" [(ngModel)]="solicitud.esTemporal">
-        <label for="estemporal">Es temporal</label>
+<div class="solicitud-container">
+    <div class="panel-izquierdo">
+        <form action="">
+            <app-empresa-modal></app-empresa-modal>
+            <div>
+                <mat-checkbox [(ngModel)]="solicitud.esTemporal" name="esTemporal" id="esTemporal"></mat-checkbox>
+                <mat-label>es Temporal</mat-label>
+            </div>
+            <div class="fila-dos">
+                <mat-form-field>
+                    <mat-label>Fecha entrada</mat-label>
+                    <input matInput [matDatepicker]="pickerEntrada" [(ngModel)]="solicitud.fechaEntrada"
+                        name="fechaEntrada" id="fechaEntrada">
+                    <mat-datepicker-toggle matSuffix [for]="pickerEntrada"></mat-datepicker-toggle>
+                    <mat-datepicker #pickerEntrada></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Fecha salida</mat-label>
+                    <input matInput [matDatepicker]="pickerSalida" [(ngModel)]="solicitud.fechaSalida"
+                        name="fechaSalida" id="fechaSalida">
+                    <mat-datepicker-toggle matSuffix [for]="pickerSalida"></mat-datepicker-toggle>
+                    <mat-datepicker #pickerSalida></mat-datepicker>
+                </mat-form-field>
+            </div>
+            <div class="fila-dos">
+                <mat-form-field>
+                    <mat-label>Hora entrada</mat-label>
+                    <input matInput type="time" [(ngModel)]="solicitud.horaEntrada" name="horaEntrada" id="horaEntrada">
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Hora entrada</mat-label>
 
-        <mat-form-field>
-            <mat-label>Fecha entrada</mat-label>
-            <input matInput [matDatepicker]="pickerEntrada" [(ngModel)]="solicitud.fechaEntrada" name="fechaEntrada" id="fechaEntrada">
-            <mat-datepicker-toggle matSuffix [for]="pickerEntrada"></mat-datepicker-toggle>
-            <mat-datepicker #pickerEntrada></mat-datepicker>
-        </mat-form-field>
-    </form>
-</header>
+                    <mat-select [(ngModel)]="solicitud.horaEntrada" name="horaEntrada">
+
+                        <mat-option *ngFor="let hora of horas" [value]="hora">
+                            {{ hora }}
+                        </mat-option>
+
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field>
+                    <mat-label>Tipo de solicitud</mat-label>
+                    <select matNativeControl [(ngModel)]="solicitud.idTipoSolicitud" name="idTipoSolicitud"
+                        id="idTipoSolicitud">
+                        <option value="" disabled selected>Selecciona un tipo de solicitud</option>
+                        <option *ngFor="let tipo of tiposSolicitud" [value]="tipo.id">{{ tipo.nombre }}</option>
+                    </select>
+                </mat-form-field>
+            </div>
+            <div class="areas-grid">
+                <mat-checkbox *ngFor="let area of areas" [checked]="solicitud.areasSeleccionadas.includes(area.id)"
+                    (change)="selectArea(area.id, $event.checked)" name="areasSeleccionadas" id="areasSeleccionadas">
+                    {{ area.carnet }}
+                </mat-checkbox>
+            </div>
+            <div>
+                <button mat-raised-button color="primary" class="btn-guardar" (click)="guardarSolicitud()">Enviar
+                    solicitud</button>
+            </div>
+        </form>
+    </div>
+    <div class="panel-derecho">
+        <!-- tabla empleados aquí -->
+    </div>
+</div>

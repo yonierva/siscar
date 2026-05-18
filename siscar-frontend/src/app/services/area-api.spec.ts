@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { Sticker } from './sticker';
+import { AreaApi } from './area-api';
 
-describe('Sticker', () => {
-  let service: Sticker;
+describe('AreaApi', () => {
+  let service: AreaApi;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(Sticker);
+    service = TestBed.inject(AreaApi);
   });
 
   it('should be created', () => {
