@@ -1,5 +1,6 @@
 export interface Sticker {
     id: number;
+    idSolicitud: number;
     nombreCompleto: string;
     numeroIdentificacion: number;
     tipoIdentificacion: string;

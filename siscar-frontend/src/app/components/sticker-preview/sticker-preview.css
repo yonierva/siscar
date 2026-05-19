@@ -1,0 +1,214 @@
+.sticker-container {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 0;
+  height: calc(100vh - 56px);
+}
+
+.panel-izquierdo {
+  background: #222222;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border-right: 1px solid #333;
+  overflow-y: auto;
+}
+
+.panel-izquierdo h2 {
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.tabla-header {
+  display: grid;
+  grid-template-columns: 130px 1fr 70px;
+  gap: 8px;
+  padding: 8px 12px;
+  font-size: 11px;
+  color: rgba(255,255,255,0.5);
+  text-transform: uppercase;
+}
+
+.tabla-fila {
+  display: grid;
+  grid-template-columns: 130px 1fr 70px;
+  gap: 8px;
+  padding: 10px 12px;
+  background: #2a2a2a;
+  border-radius: 8px;
+  align-items: center;
+  font-size: 12px;
+  color: white;
+  border: 1px solid #333;
+  cursor: pointer;
+}
+
+.tabla-fila.seleccionado {
+  border-color: #E85D04;
+}
+
+.btn-vista {
+  background: #E85D04;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 11px;
+}
+
+.btn-imprimir {
+  background: transparent;
+  color: #E85D04;
+  border: 1px solid #E85D04;
+  border-radius: 6px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-size: 13px;
+  margin-top: 8px;
+}
+
+.panel-derecho {
+  background: #1a1a1a;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sin-seleccion {
+  color: rgba(255,255,255,0.3);
+  font-size: 14px;
+}
+
+.sticker-card {
+  background: white;
+  border-radius: 8px;
+  padding: 24px;
+  width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sticker-empresa-aeropuerto {
+  font-size: 9px;
+  font-weight: 500;
+  color: #333;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.sticker-empresa-nombre {
+  font-size: 13px;
+  font-weight: 500;
+  color: #E85D04;
+  text-align: center;
+}
+
+.sticker-body {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.sticker-foto img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid #e0e0e0;
+}
+
+.avatar-placeholder {
+  width: 100px;
+  height: 100px;
+  background: #f0f0f0;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  font-weight: 500;
+  color: #999;
+}
+
+.sticker-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.sticker-nombre {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+}
+
+.sticker-cedula-areas {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.sticker-cedula {
+  font-size: 14px;
+  color: #666;
+}
+
+.sticker-areas {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.area-badge {
+  background: #E85D04;
+  color: white;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.sticker-fechas {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+}
+
+.fecha-fila {
+  display: flex;
+  gap: 4px;
+  font-size: 13px;
+  color: #666;
+}
+
+.fecha-label {
+  font-weight: 500;
+  color: #333;
+}
+
+.sticker-empresa-aeropuerto {
+  font-size: 11px;
+  font-weight: 500;
+  color: #333;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.badge-temporal {
+  background: #FDE8D8;
+  color: #E85D04;
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-size: 10px;
+  font-weight: 500;
+}

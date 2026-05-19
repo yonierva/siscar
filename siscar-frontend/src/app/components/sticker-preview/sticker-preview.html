@@ -1,1 +1,79 @@
-<p>sticker-preview works!</p>
+<div class="sticker-container">
+
+    <!-- Panel izquierdo — lista -->
+    <div class="panel-izquierdo">
+        <h2>Stickers generados</h2>
+
+        <div class="tabla-header">
+            <span>Identificación</span>
+            <span>Nombre</span>
+            <span>Ver</span>
+        </div>
+
+        <div class="tabla-fila" *ngFor="let sticker of stickers"
+            [class.seleccionado]="stickerSeleccionado?.id === sticker.id">
+            <span>{{ sticker.numeroIdentificacion }}</span>
+            <span>{{ sticker.nombreCompleto }}</span>
+            <button class="btn-vista" (click)="verSticker(sticker)">Vista</button>
+        </div>
+    </div>
+
+    <!-- Panel derecho — carnet -->
+    <div class="panel-derecho">
+
+        <div class="sin-seleccion" *ngIf="!stickerSeleccionado">
+            <span>Seleccione un empleado</span>
+        </div>
+
+        <div class="sticker-card" *ngIf="stickerSeleccionado">
+            <div class="sticker-empresa-aeropuerto">
+                AEROPUERTO INTERNACIONAL RAFAEL NUÑEZ
+            </div>
+            <div class="sticker-empresa-nombre">
+                {{ stickerSeleccionado.razonSocialEmpresa }}
+            </div>
+
+            <div class="sticker-body">
+                <div class="sticker-foto">
+                    <img *ngIf="stickerSeleccionado.urlImagen" [src]="stickerSeleccionado.urlImagen" alt="foto">
+                    <div class="avatar-placeholder" *ngIf="!stickerSeleccionado.urlImagen">
+                        {{ stickerSeleccionado.nombreCompleto[0] }}
+                    </div>
+                </div>
+
+                <div class="sticker-info">
+                    <div class="sticker-nombre">{{ stickerSeleccionado.nombreCompleto }}</div>
+                    <div class="sticker-cedula-areas">
+                        <span class="sticker-cedula">{{ stickerSeleccionado.numeroIdentificacion }}</span>
+                        <div class="sticker-areas">
+                            <span class="area-badge" *ngFor="let area of stickerSeleccionado.areas">
+                                {{ area }}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="sticker-fechas">
+                        <div class="fecha-fila">
+                            <span class="fecha-label">FE:</span>
+                            <span>{{ stickerSeleccionado.fechaEntrada }}</span>
+                        </div>
+                        <div class="fecha-fila">
+                            <span class="fecha-label">FS:</span>
+                            <span>{{ stickerSeleccionado.fechaSalida }}</span>
+                        </div>
+                        <div class="fecha-fila">
+                            <span class="fecha-label">HE:</span>
+                            <span>{{ stickerSeleccionado.horaEntrada }}</span>
+                        </div>
+                        <div class="fecha-fila">
+                            <span class="fecha-label">HS:</span>
+                            <span>{{ stickerSeleccionado.horaSalida }}</span>
+                        </div>
+                    </div>
+                    <div *ngIf="stickerSeleccionado.esTemporal">
+                        <span class="badge-temporal">TEMPORAL</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

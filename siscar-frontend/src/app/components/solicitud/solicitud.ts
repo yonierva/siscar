@@ -11,6 +11,7 @@ import { TipoSolicitud } from '../../models/tipo-solicitud.model';
 import { Area } from '../../models/area.model';
 
 import { TipoSolicitudApi } from '../../services/tipo-solicitud-api';
+import { SolicitudEstadoApi } from '../../services/solicitud-estado-api';
 import { AreaApi } from '../../services/area-api';
 import { SolicitudApi } from '../../services/solicitud-api';
 
@@ -75,7 +76,11 @@ export class Solicitud {
 
   empresaNombre: string = '';
 
-  constructor(private tipoSolicitudApi: TipoSolicitudApi, private areaApi: AreaApi, private solicitudApi: SolicitudApi, private chr: ChangeDetectorRef) { }
+  constructor(private tipoSolicitudApi: TipoSolicitudApi, 
+              private areaApi: AreaApi, 
+              private solicitudApi: SolicitudApi,
+              private solicitudEstadoApi: SolicitudEstadoApi,
+              private chr: ChangeDetectorRef) {}
 
   ngOnInit() {
     this.obtenerTiposSolicitud();
@@ -95,6 +100,9 @@ export class Solicitud {
     this.solicitudApi.guardarSolicitud(this.solicitud).subscribe({
       next: (response) => {
         console.log('Solicitud enviada con éxito', response);
+        if(response.length > 0) {
+          this.solicitudEstadoApi.setIdSolicitud(response[0].idSolicitud);
+        }
       },
       error: (error) => {
         console.error('Error al enviar la solicitud', error);

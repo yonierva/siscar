@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { solicitud } from '../models/solicitud.model';
+import { Sticker } from '../models/sticker.model';
 import { environment } from '../../environments/environments';
 
 @Injectable({
@@ -12,7 +13,7 @@ export class SolicitudApi {
 
   constructor(private http: HttpClient) {}
 
-  guardarSolicitud(solicitud: solicitud): Observable<solicitud> {
-    return this.http.post<solicitud>(`${this.apiUrl}/guardar`, solicitud);
+  guardarSolicitud(solicitud: solicitud): Observable<Sticker[]> {
+    return this.http.post<Sticker[]>(`${this.apiUrl}/guardar`, solicitud);
   }
 }
