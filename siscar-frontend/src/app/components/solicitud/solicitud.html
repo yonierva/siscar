@@ -1,10 +1,10 @@
 <div class="solicitud-container">
     <div class="panel-izquierdo">
         <form action="">
-            <app-empresa-modal (empresaSeleccionada)="onEmpresaSeleccionada($event)"></app-empresa-modal>
+            <app-empresa-modal (empresaSeleccionada)="onEmpresaSeleccionada($event)" (busquedaEmpresaRealizada)="onBusquedaEmpresaRealizada($event)"></app-empresa-modal>
             <div>
                 <mat-checkbox [(ngModel)]="solicitud.esTemporal" name="esTemporal" id="esTemporal"></mat-checkbox>
-                <mat-label>es Temporal</mat-label>
+                <mat-label>Es Temporal</mat-label>
             </div>
             <div class="fila-dos">
                 <mat-form-field>
@@ -49,11 +49,10 @@
             <div>
                 <mat-form-field>
                     <mat-label>Tipo de solicitud</mat-label>
-                    <select matNativeControl [(ngModel)]="solicitud.idTipoSolicitud" name="idTipoSolicitud"
+                    <mat-select matNativeControl [(ngModel)]="solicitud.idTipoSolicitud" name="idTipoSolicitud"
                         id="idTipoSolicitud">
-                        <option value="" disabled selected>Selecciona un tipo de solicitud</option>
-                        <option *ngFor="let tipo of tiposSolicitud" [value]="tipo.id">{{ tipo.nombre }}</option>
-                    </select>
+                        <mat-option *ngFor="let tipo of tiposSolicitud" [value]="tipo.id">{{ tipo.nombre }}</mat-option>
+                    </mat-select>
                 </mat-form-field>
             </div>
             <div class="areas-grid">
@@ -69,6 +68,6 @@
         </form>
     </div>
     <div class="panel-derecho">
-        <app-empleado-modal [idEmpresa]="solicitud.idEmpresa" (empleadosActualizados)="onEmpleadosActualizados($event)"></app-empleado-modal>
+        <app-empleado-modal [idEmpresa]="solicitud.idEmpresa" (empleadosActualizados)="onEmpleadosActualizados($event)" [empresaSeleccionada]="busquedaEmpresaRealizada"></app-empleado-modal>
     </div>
 </div>

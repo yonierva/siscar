@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ChangeDetectorRef } from '@angular/core';
+import { Router } from '@angular/router';
+
+import Swal from 'sweetalert2';
 
 import { EmpresaModal } from '../empresa-modal/empresa-modal';
 import { EmpleadoModal } from '../empleado-modal/empleado-modal';
@@ -50,6 +53,8 @@ export class Solicitud {
     nombreJefeInmediato: ''
   }
 
+  busquedaEmpresaRealizada: boolean = false;
+
   horas: string[] = [
     '06:00',
     '07:00',
@@ -80,6 +85,7 @@ export class Solicitud {
               private areaApi: AreaApi, 
               private solicitudApi: SolicitudApi,
               private solicitudEstadoApi: SolicitudEstadoApi,
+              private router: Router,
               private chr: ChangeDetectorRef) {}
 
   ngOnInit() {
@@ -92,6 +98,10 @@ export class Solicitud {
     this.empresaNombre = empresa.razonSocial;
   }
 
+  onBusquedaEmpresaRealizada(realizada: boolean) {
+    this.busquedaEmpresaRealizada = realizada;
+  }
+
   onEmpleadosActualizados(ids: number[]) {
     this.solicitud.empleadosSeleccionados = ids;
   }
@@ -102,10 +112,26 @@ export class Solicitud {
         console.log('Solicitud enviada con éxito', response);
         if(response.length > 0) {
           this.solicitudEstadoApi.setIdSolicitud(response[0].idSolicitud);
+          Swal.fire({
+            icon: 'success',
+            title: 'Solicitud enviada',
+            text: 'Tu solicitud ha sido enviada exitosamente.',
+            timer: 2000,
+            showConfirmButton: false
+          }).then(() => {
+            this.router.navigate(['/sticker-preview']);
+          });
         }
       },
       error: (error) => {
         console.error('Error al enviar la solicitud', error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Hubo un error al enviar tu solicitud. Por favor, intenta nuevamente.',
+          timer: 2000,
+          showConfirmButton: false
+        });
       }
     });
   }

@@ -20,13 +20,18 @@
 }
 
 .busqueda-row {
-  display: flex;
-  gap: 8px;
-  align-items: flex-start;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .busqueda-row mat-form-field {
-  width: 200px;
+    width: 250px;
+}
+
+.busqueda-row button {
+    height: 56px;
+    margin-top: -22px;
 }
 
 .tabla-empleados {

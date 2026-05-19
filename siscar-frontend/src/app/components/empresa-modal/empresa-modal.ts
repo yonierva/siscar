@@ -32,6 +32,7 @@ import {
 export class EmpresaModal {
 
   @Output() empresaSeleccionada = new EventEmitter<Empresa>();
+  @Output() busquedaEmpresaRealizada = new EventEmitter<boolean>();
 
   busqueda: string = '';
   empresas: Empresa[] = [];
@@ -79,6 +80,7 @@ export class EmpresaModal {
   seleccionar(empresa: Empresa) {
     this.empresaElegida = empresa;
     this.empresaSeleccionada.emit(empresa);
+    this.busquedaEmpresaRealizada.emit(true);
     this.cerrarModal();
   }
 }

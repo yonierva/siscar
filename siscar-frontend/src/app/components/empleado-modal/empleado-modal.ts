@@ -5,8 +5,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSelectModule } from '@angular/material/select';
 import { EmpleadoApi } from '../../services/empleado-api';
 import { Empleado } from '../../models/empleado.model';
+
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-empleado-modal',
@@ -17,7 +20,8 @@ import { Empleado } from '../../models/empleado.model';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatSelectModule
   ],
   templateUrl: './empleado-modal.html',
   styleUrl: './empleado-modal.css'
@@ -25,6 +29,7 @@ import { Empleado } from '../../models/empleado.model';
 export class EmpleadoModal implements OnChanges {
 
   @Input() idEmpresa: number = 0;
+  @Input() empresaSeleccionada: boolean = false;
   @Output() empleadosActualizados = new EventEmitter<number[]>();
 
   empleados: Empleado[] = [];
@@ -47,6 +52,17 @@ export class EmpleadoModal implements OnChanges {
     { value: 'C.C.', label: 'Cédula de Ciudadanía' },
     { value: 'T.I.', label: 'Tarjeta de Identidad' },
     { value: 'P.S.', label: 'Pasaporte' }
+  ];
+
+  tiposSangre = [
+    { value: 'A+', label: 'A+' },
+    { value: 'A-', label: 'A-' },
+    { value: 'B+', label: 'B+' },
+    { value: 'B-', label: 'B-' },
+    { value: 'AB+', label: 'AB+' },
+    { value: 'AB-', label: 'AB-' },
+    { value: 'O+', label: 'O+' },
+    { value: 'O-', label: 'O-' }
   ];
 
   constructor(
@@ -101,9 +117,23 @@ export class EmpleadoModal implements OnChanges {
         this.mostrarFormCrear = false;
         this.cedula = '';
         this.cdr.detectChanges();
+        Swal.fire({
+          icon: 'success',
+          title: 'Empleado creado',
+          text: 'El empleado ha sido creado exitosamente.',
+          timer: 2000,
+          showConfirmButton: false
+        });
       },
       error: (error) => {
         console.error('Error al crear empleado', error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Hubo un error al crear el empleado. Por favor, intenta nuevamente.',
+          timer: 2000,
+          showConfirmButton: false
+        });
       }
     });
   }
@@ -115,5 +145,9 @@ export class EmpleadoModal implements OnChanges {
       this.empleadosSeleccionados = this.empleadosSeleccionados.filter(e => e !== id);
     }
     this.empleadosActualizados.emit(this.empleadosSeleccionados);
+  }
+
+  limpiarSeleccion() {
+    this.cargarEmpleados();
   }
 }

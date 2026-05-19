@@ -83,3 +83,33 @@ form {
   color: white;
   font-size: 14px;
 }
+
+::ng-deep .mat-mdc-option {
+  background-color: #1e1e1e !important;
+  color: white !important;
+}
+
+::ng-deep .mat-mdc-option:hover {
+  background-color: #ff6600 !important;
+}
+
+::ng-deep .mat-mdc-select-panel {
+  background: #222 !important;
+}
+
+::ng-deep .mdc-checkbox__background {
+  border-color: #ff6600 !important;
+}
+
+::ng-deep .mdc-checkbox--selected .mdc-checkbox__background {
+  background-color: #ff6600 !important;
+  border-color: #ff6600 !important;
+}
+
+::ng-deep .mdc-checkbox__checkmark {
+  color: white !important;
+}
+
+::ng-deep .mat-mdc-checkbox label {
+  color: white !important;
+}

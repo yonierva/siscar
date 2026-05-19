@@ -5,9 +5,15 @@
         <div class="busqueda-row">
             <mat-form-field>
                 <mat-label>Buscar por cédula</mat-label>
-                <input matInput [(ngModel)]="cedula" name="cedula" (keyup.enter)="buscarPorCedula()" type="number">
+                <input matInput [(ngModel)]="cedula" name="cedula" (keyup.enter)="buscarPorCedula()" type="text" pattern="[0-9]*" inputmode="numeric"
+                [disabled]="!empresaSeleccionada" minlength="10" maxlength="10">
             </mat-form-field>
-            <button mat-raised-button (click)="buscarPorCedula()">Buscar</button>
+            <button mat-raised-button (click)="buscarPorCedula()" [disabled]="!empresaSeleccionada || cedula.length !== 10">
+                Buscar
+            </button>
+            <button mat-raised-button (click)="limpiarSeleccion()">
+                limpiar
+            </button>
         </div>
     </div>
 
@@ -55,21 +61,26 @@
         <div class="fila-dos">
             <mat-form-field>
                 <mat-label>Tipo identificación</mat-label>
-                <select matNativeControl [(ngModel)]="nuevoEmpleado.tipoIdentificacion" name="tipoIdentificacion">
-                    <option *ngFor="let tipo of tiposIdentificacion" [value]="tipo.value">
+                <mat-select matNativeControl [(ngModel)]="nuevoEmpleado.tipoIdentificacion" name="tipoIdentificacion">
+                    <mat-option *ngFor="let tipo of tiposIdentificacion" [value]="tipo.value">
                         {{ tipo.label }}
-                    </option>
-                </select>
+                    </mat-option>
+                </mat-select>
             </mat-form-field>
             <mat-form-field>
                 <mat-label>Número identificación</mat-label>
-                <input matInput [(ngModel)]="nuevoEmpleado.numeroIdentificacion" name="numeroIdentificacion">
+                <input matInput [(ngModel)]="nuevoEmpleado.numeroIdentificacion" name="numeroIdentificacion" type="text" pattern="[0-9]*" 
+                inputmode="numeric" minlength="10" maxlength="10">
             </mat-form-field>
         </div>
         <div class="fila-dos">
             <mat-form-field>
                 <mat-label>Tipo sangre</mat-label>
-                <input matInput [(ngModel)]="nuevoEmpleado.tipoSangre" name="tipoSangre">
+                <mat-select matNativeControl [(ngModel)]="nuevoEmpleado.tipoSangre" name="tipoSangre">
+                    <mat-option *ngFor="let tipo of tiposSangre" [value]="tipo.value">
+                        {{ tipo.label }}
+                    </mat-option>
+                </mat-select>
             </mat-form-field>
             <mat-form-field>
                 <mat-label>URL Imagen</mat-label>
