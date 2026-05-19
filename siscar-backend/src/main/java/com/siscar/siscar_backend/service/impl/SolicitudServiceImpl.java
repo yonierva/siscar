@@ -102,6 +102,7 @@ public class SolicitudServiceImpl implements ISolicitudService {
 
         StickerResponseDTO dto = new StickerResponseDTO();
         dto.setId(sticker.getId());
+        dto.setIdSolicitud(sticker.getIdSolicitud());
         dto.setFechaEntrada(sticker.getFechaEntrada());
         dto.setFechaSalida(sticker.getFechaSalida());
         dto.setHoraEntrada(sticker.getHoraEntrada());

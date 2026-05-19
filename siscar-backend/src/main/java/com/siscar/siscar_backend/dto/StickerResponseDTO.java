@@ -9,6 +9,7 @@ import java.util.List;
 public class StickerResponseDTO {
 
     private Integer id;
+    private Integer idSolicitud;
     private Integer idEmpleado;
     private String nombreCompleto;
     private Long numeroIdentificacion;
