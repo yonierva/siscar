@@ -116,7 +116,6 @@ export class EmpleadoModal implements OnChanges {
         this.empleados.push(response);
         this.mostrarFormCrear = false;
         this.cedula = '';
-        this.cdr.detectChanges();
         Swal.fire({
           icon: 'success',
           title: 'Empleado creado',
@@ -124,6 +123,7 @@ export class EmpleadoModal implements OnChanges {
           timer: 2000,
           showConfirmButton: false
         });
+        this.cargarEmpleados();
       },
       error: (error) => {
         console.error('Error al crear empleado', error);

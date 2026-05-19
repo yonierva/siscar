@@ -82,5 +82,7 @@ export class EmpresaModal {
     this.empresaSeleccionada.emit(empresa);
     this.busquedaEmpresaRealizada.emit(true);
     this.cerrarModal();
+    console.log('Empresa seleccionada:', this.empresaElegida.razonSocial);
+    this.cdr.markForCheck();
   }
 }
