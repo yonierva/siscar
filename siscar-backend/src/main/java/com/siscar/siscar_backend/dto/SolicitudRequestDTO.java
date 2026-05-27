@@ -21,4 +21,5 @@ public class SolicitudRequestDTO {
     private String actividadRealizar;
     private String correoFacturacion;
     private String solicitadoPor;
+    private String estado;
 }

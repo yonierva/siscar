@@ -11,4 +11,5 @@ import java.util.List;
 @Repository
 public interface SolicitudAreaRepository extends JpaRepository<SolicitudArea, Integer> {
     List<SolicitudArea> findByIdSolicitud(Integer idSolicitud);
+    void deleteByIdSolicitud(Integer idSolicitud);
 }

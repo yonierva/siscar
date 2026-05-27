@@ -5,6 +5,8 @@ import com.siscar.siscar_backend.dto.StickerResponseDTO;
 import com.siscar.siscar_backend.model.*;
 import com.siscar.siscar_backend.repository.*;
 import com.siscar.siscar_backend.service.ISolicitudService;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,9 +27,12 @@ public class SolicitudServiceImpl implements ISolicitudService {
     private final EmpresaRepository empresaRepository;
     private final AreaRepository areaRepository;
 
+    @PersistenceContext
+    private EntityManager entityManager;
+
     @Override
     @Transactional
-    public List<StickerResponseDTO> guardarSolicitud(SolicitudRequestDTO dto) {
+    public Integer crearDraft(SolicitudRequestDTO dto) {
 
         if (dto.getIdEmpresa() == null)
             throw new IllegalArgumentException("Debe seleccionar una empresa");
@@ -59,6 +64,7 @@ public class SolicitudServiceImpl implements ISolicitudService {
         solicitud.setCorreoFacturacion(dto.getCorreoFacturacion());
         solicitud.setSolicitadoPor(dto.getSolicitadoPor());
         solicitud.setImprimioSolicitud(false);
+        solicitud.setEstado("draft");
         Solicitud solicitudGuardada = solicitudRepository.save(solicitud);
 
         // 2. Guardar Solicitudes_Areas
@@ -69,8 +75,7 @@ public class SolicitudServiceImpl implements ISolicitudService {
             solicitudAreaRepository.save(sa);
         }
 
-        // 3. Guardar SolicitudEmpleado y Stickers
-        List<StickerResponseDTO> stickers = new ArrayList<>();
+        // 3. Guardar SolicitudEmpleado
         for (Integer idEmpleado : dto.getEmpleadosSeleccionados()) {
 
             // SolicitudEmpleado
@@ -78,21 +83,63 @@ public class SolicitudServiceImpl implements ISolicitudService {
             se.setIdEmpleado(idEmpleado);
             se.setIdSolicitud(solicitudGuardada.getId());
             solicitudEmpleadoRepository.save(se);
+        }
 
-            // Sticker
+        return solicitudGuardada.getId();
+    }
+
+    @Override
+    @Transactional
+    public List<StickerResponseDTO> guardarSolicitud(Integer idSolicitud) {
+
+        Solicitud solicitud = solicitudRepository.findById(idSolicitud)
+                .orElseThrow(() -> new RuntimeException("Solicitud no encontrada"));
+
+        List<SolicitudEmpleado> empleados =
+                solicitudEmpleadoRepository.findByIdSolicitud(idSolicitud);
+
+        List<SolicitudArea> areas =
+                solicitudAreaRepository.findByIdSolicitud(idSolicitud);
+
+        List<Integer> idsAreas = areas.stream()
+                .map(SolicitudArea::getIdArea)
+                .toList();
+
+        List<StickerResponseDTO> stickers = new ArrayList<>();
+
+        for (SolicitudEmpleado se : empleados) {
+
             Sticker sticker = new Sticker();
-            sticker.setIdEmpleado(idEmpleado);
-            sticker.setIdSolicitud(solicitudGuardada.getId());
-            sticker.setFechaEntrada(dto.getFechaEntrada());
-            sticker.setFechaSalida(dto.getFechaSalida());
-            sticker.setHoraEntrada(dto.getHoraEntrada());
-            sticker.setHoraSalida(dto.getHoraSalida());
-            sticker.setEsTemporal(dto.getEsTemporal());
+
+            sticker.setIdEmpleado(se.getIdEmpleado());
+            sticker.setIdSolicitud(idSolicitud);
+
+            sticker.setFechaEntrada(solicitud.getFechaSolicitud());
+            sticker.setFechaSalida(solicitud.getFechaSolicitud());
+
+            sticker.setHoraEntrada(solicitud.getHoraEntrada());
+            sticker.setHoraSalida(solicitud.getHoraSalida());
+
+            sticker.setEsTemporal(true);
+
             sticker.setDevolvioStickers(false);
+
             stickerRepository.save(sticker);
 
-            stickers.add(buildStickerResponse(sticker, idEmpleado, dto.getAreasSeleccionadas(), dto.getIdEmpresa()));
+            stickers.add(
+                    buildStickerResponse(
+                            sticker,
+                            se.getIdEmpleado(),
+                            idsAreas,
+                            solicitud.getIdEmpresa()
+                    )
+            );
         }
+
+        // COMPLETAR
+        solicitud.setEstado("completed");
+
+        solicitudRepository.save(solicitud);
 
         return stickers;
     }
@@ -130,6 +177,62 @@ public class SolicitudServiceImpl implements ISolicitudService {
         dto.setAreas(nombresAreas);
 
         return dto;
+    }
+
+    @Override
+    @Transactional
+    public void actualizarDraft(Integer idSolicitud, SolicitudRequestDTO dto) {
+
+        Solicitud solicitud = solicitudRepository.findById(idSolicitud)
+                .orElseThrow(() -> new RuntimeException("Solicitud no encontrada"));
+
+        // ACTUALIZAR SOLICITUD
+        solicitud.setIdEmpresa(dto.getIdEmpresa());
+
+        solicitud.setIdTipoSolicitud(dto.getIdTipoSolicitud());
+
+        solicitud.setHoraEntrada(dto.getHoraEntrada());
+        solicitud.setHoraSalida(dto.getHoraSalida());
+
+        solicitud.setNombreJefeInmediato(dto.getNombreJefeInmediato());
+
+        solicitud.setActividadRealizar(dto.getActividadRealizar());
+
+        solicitud.setCorreoFacturacion(dto.getCorreoFacturacion());
+
+        solicitud.setSolicitadoPor(dto.getSolicitadoPor());
+
+        solicitudRepository.save(solicitud);
+
+        // ELIMINAR ÁREAS ANTERIORES
+        solicitudAreaRepository.deleteByIdSolicitud(idSolicitud);
+        entityManager.flush();
+
+        // CREAR NUEVAS ÁREAS
+        for (Integer idArea : dto.getAreasSeleccionadas()) {
+
+            SolicitudArea sa = new SolicitudArea();
+
+            sa.setIdSolicitud(idSolicitud);
+            sa.setIdArea(idArea);
+
+            solicitudAreaRepository.save(sa);
+        }
+
+        // ELIMINAR EMPLEADOS ANTERIORES
+        solicitudEmpleadoRepository.deleteByIdSolicitud(idSolicitud);
+        entityManager.flush();
+
+        // CREAR NUEVOS EMPLEADOS
+        for (Integer idEmpleado : dto.getEmpleadosSeleccionados()) {
+
+            SolicitudEmpleado se = new SolicitudEmpleado();
+
+            se.setIdSolicitud(idSolicitud);
+            se.setIdEmpleado(idEmpleado);
+
+            solicitudEmpleadoRepository.save(se);
+        }
     }
 
 }

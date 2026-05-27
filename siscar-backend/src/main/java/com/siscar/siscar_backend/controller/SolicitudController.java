@@ -17,8 +17,21 @@ public class SolicitudController {
 
     private final ISolicitudService solicitudService;
 
-    @PostMapping("/guardar")
-    public ResponseEntity<List<StickerResponseDTO>> guardarSolicitud(@RequestBody SolicitudRequestDTO dto ){
-        return ResponseEntity.ok(solicitudService.guardarSolicitud(dto));
+    @PostMapping("/draft")
+    public ResponseEntity<Integer> crearDraft(@RequestBody SolicitudRequestDTO dto) {
+        Integer idSolicitud = solicitudService.crearDraft(dto);
+        return ResponseEntity.ok(idSolicitud);
+    }
+
+
+    @PostMapping("/{idSolicitud}/guardar")
+    public ResponseEntity<List<StickerResponseDTO>> guardarSolicitud(@PathVariable Integer idSolicitud) {
+        return ResponseEntity.ok(solicitudService.guardarSolicitud(idSolicitud));
+    }
+
+    @PutMapping("/{idSolicitud}")
+    public ResponseEntity<String> actualizarDraft(@PathVariable Integer idSolicitud, @RequestBody SolicitudRequestDTO dto) {
+        solicitudService.actualizarDraft(idSolicitud, dto);
+        return ResponseEntity.ok("Draft actualizado");
     }
 };

@@ -5,5 +5,7 @@ import com.siscar.siscar_backend.dto.StickerResponseDTO;
 import java.util.List;
 
 public interface ISolicitudService {
-    List<StickerResponseDTO> guardarSolicitud(SolicitudRequestDTO dto);
+    Integer crearDraft(SolicitudRequestDTO dto);
+    List<StickerResponseDTO> guardarSolicitud(Integer idSolicitud);
+    void actualizarDraft(Integer idSolicitud, SolicitudRequestDTO dto);
 }

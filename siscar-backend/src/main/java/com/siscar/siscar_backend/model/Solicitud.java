@@ -50,4 +50,7 @@ public class Solicitud {
 
     @Column(name = "IDEN_area")
     private Integer idArea;
+
+    @Column(name = "estado")
+    private String estado;
 }
